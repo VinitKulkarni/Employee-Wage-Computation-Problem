@@ -9,15 +9,22 @@ public class EmployeeWageCalculation {
         int partTimeWorkHrs = 4;
 
         int isPresent = (int)(Math.random() * 10)%3;
-        if(isPresent == 1){
-            System.out.println("Employee is Present");
-            totalWage = (fullDayWorkHrs * perHourWage);
-        } else if (isPresent == 2) {
-            System.out.println("Employee Working Part Time");
-            totalWage = (partTimeWorkHrs * perHourWage);
-        } else{
-            System.out.println("Employee is Absent");
-            totalWage = 0;
+        switch (isPresent) {
+            case 1:
+                System.out.println("Emp is Full day present");
+                totalWage = (fullDayWorkHrs * perHourWage);
+                break;
+            case 2:
+                System.out.println("Emp doing part time");
+                totalWage = (partTimeWorkHrs * perHourWage);
+                break;
+            case 0:
+                System.out.println("Emp is absent");
+                totalWage = 0;
+                break;
+            default:
+                System.out.println("!!!Something wrong!!!");
+                break;
         }
         System.out.println("TOTAL WAGE = " +totalWage);
     }
