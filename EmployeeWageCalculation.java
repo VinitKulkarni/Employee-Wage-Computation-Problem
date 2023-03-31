@@ -6,12 +6,16 @@ public class EmployeeWageCalculation {
         int totalWage = 0;
         int perHourWage = 20;
         int fullDayWorkHrs = 8;
+        int partTimeWorkHrs = 4;
 
-        int isPresent = (int)(Math.random() * 10)%2;
+        int isPresent = (int)(Math.random() * 10)%3;
         if(isPresent == 1){
             System.out.println("Employee is Present");
             totalWage = (fullDayWorkHrs * perHourWage);
-        }else{
+        } else if (isPresent == 2) {
+            System.out.println("Employee Working Part Time");
+            totalWage = (partTimeWorkHrs * perHourWage);
+        } else{
             System.out.println("Employee is Absent");
             totalWage = 0;
         }
