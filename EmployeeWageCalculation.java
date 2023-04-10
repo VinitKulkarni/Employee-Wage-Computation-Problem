@@ -20,7 +20,7 @@ public class EmployeeWageCalculation {
         int totalWage = 0; //eachtimeupdate
         int empHrs = 0; //differentvalues
 
-        for(int i = 1; i<= TOTAL_WORKING_DAYS_IN_MONTH; i++) {
+        for(int i = 1; i <= TOTAL_WORKING_DAYS_IN_MONTH; i++) {
             int isPresent = checkEmpAttendence();
             switch (isPresent) {
                 case 1:
@@ -43,10 +43,8 @@ public class EmployeeWageCalculation {
                     break;
             }
             finalWage = finalWage + totalWage;
-            //System.out.println("FINAL WAGE = " + finalWage);
 
             finalWorkHrs = finalWorkHrs + empHrs;
-            //System.out.println("FINAL WORK HRS = " + finalWorkHrs);
 
 
             System.out.println("Day->" + i + " : FinalWage->" + finalWage + " : WorkHrs->" + finalWorkHrs);
