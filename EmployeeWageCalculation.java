@@ -5,32 +5,34 @@ public class EmployeeWageCalculation {
     static int finalWorkHrs = 0;
 
     //all static fixed values
-    static final int PER_HOUR_WAGE = 20;
     static final int FULL_DAY_WORK_HRS = 8;
     static final int PART_TIME_WORK_HRS = 4;
-    static final int TOTAL_WORKING_DAYS_IN_MONTH = 20;
-    static final int MAX_WORK_HRS_IN_MOTH = 100;
 
+    static void resetValues(){
+        finalWage = 0;
+        finalWorkHrs = 0;
+    }
     static int checkEmpAttendence(){
         int isPresent = (int) (Math.random() * 10) % 3;
         return isPresent;
     }
 
-    static int calculateWage(){
+    static int calculateWage(String companyName, int totalWorkingDaysInMonth, int maxWorkHrsInMonth,
+                             int perHourWage){
         int totalWage = 0; //eachtimeupdate
         int empHrs = 0; //differentvalues
 
-        for(int i = 1; i <= TOTAL_WORKING_DAYS_IN_MONTH; i++) {
+        for(int i = 1; i <= totalWorkingDaysInMonth; i++) {
             int isPresent = checkEmpAttendence();
             switch (isPresent) {
                 case 1:
                     System.out.println("Emp is Full day present");
-                    totalWage = (FULL_DAY_WORK_HRS * PER_HOUR_WAGE);
+                    totalWage = (FULL_DAY_WORK_HRS * perHourWage);
                     empHrs = 8;
                     break;
                 case 2:
                     System.out.println("Emp doing part time");
-                    totalWage = (PART_TIME_WORK_HRS * PER_HOUR_WAGE);
+                    totalWage = (PART_TIME_WORK_HRS * perHourWage);
                     empHrs = 4;
                     break;
                 case 0:
@@ -50,10 +52,10 @@ public class EmployeeWageCalculation {
             System.out.println("Day->" + i + " : FinalWage->" + finalWage + " : WorkHrs->" + finalWorkHrs);
             System.out.println("---------------------");
 
-            if(finalWorkHrs == MAX_WORK_HRS_IN_MOTH){
+            if(finalWorkHrs == maxWorkHrsInMonth){
                 System.out.println("EMP COMPLETED HIS WORK HRS OF THIS MONTH");
                 break;
-            } else if (finalWorkHrs > MAX_WORK_HRS_IN_MOTH) {
+            } else if (finalWorkHrs > maxWorkHrsInMonth) {
                 System.out.println("!Work Hrs Exceeds the limit! Reset");
                 finalWage = finalWage - totalWage;
                 System.out.println("Final wage --> " +finalWage);
@@ -66,9 +68,17 @@ public class EmployeeWageCalculation {
     }
 
     public static void main(String[] args) {
-        System.out.println("Employee Wage Calculation");
+        System.out.println(" * * * Employee Wage Calculation * * * ");
 
-        int totalWage = calculateWage();
-        System.out.println("TOTAL WAGE = " +totalWage);
+
+        int wiproTotalWage = calculateWage("Wipro", 28, 140, 22);
+        System.out.println("TOTAL WAGE (emp working in wipro) = " +wiproTotalWage);
+
+        resetValues();
+        System.out.println();
+        System.out.println();
+
+        int tcsTotalWage = calculateWage("TCS", 25, 120, 25);
+        System.out.println("TOTAL WAGE (emp working in tcs) = " +tcsTotalWage);
     }
 }
