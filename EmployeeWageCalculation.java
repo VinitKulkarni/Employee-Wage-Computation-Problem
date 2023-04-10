@@ -3,26 +3,34 @@ package com.bridgelabz.Day3PP1;
 public class EmployeeWageCalculation {
     static int finalWage = 0;
     static int finalWorkHrs = 0;
-    public static void main(String[] args) {
-        System.out.println("Employee Wage Calculation");
-        int totalWage = 0;
-        int perHourWage = 20;
-        int fullDayWorkHrs = 8;
-        int partTimeWorkHrs = 4;
-        int totalWorkingDaysInMonth = 20;
-        int empHrs = 0;
 
-        for(int i=0; i<totalWorkingDaysInMonth; i++) {
-            int isPresent = (int) (Math.random() * 10) % 3;
+    //all static fixed values
+    static final int PER_HOUR_WAGE = 20;
+    static final int FULL_DAY_WORK_HRS = 8;
+    static final int PART_TIME_WORK_HRS = 4;
+    static final int TOTAL_WORKING_DAYS_IN_MONTH = 20;
+    static final int MAX_WORK_HRS_IN_MOTH = 100;
+
+    static int checkEmpAttendence(){
+        int isPresent = (int) (Math.random() * 10) % 3;
+        return isPresent;
+    }
+
+    static int calculateWage(){
+        int totalWage = 0; //eachtimeupdate
+        int empHrs = 0; //differentvalues
+
+        for(int i = 1; i<= TOTAL_WORKING_DAYS_IN_MONTH; i++) {
+            int isPresent = checkEmpAttendence();
             switch (isPresent) {
                 case 1:
                     System.out.println("Emp is Full day present");
-                    totalWage = (fullDayWorkHrs * perHourWage);
+                    totalWage = (FULL_DAY_WORK_HRS * PER_HOUR_WAGE);
                     empHrs = 8;
                     break;
                 case 2:
                     System.out.println("Emp doing part time");
-                    totalWage = (partTimeWorkHrs * perHourWage);
+                    totalWage = (PART_TIME_WORK_HRS * PER_HOUR_WAGE);
                     empHrs = 4;
                     break;
                 case 0:
@@ -35,15 +43,19 @@ public class EmployeeWageCalculation {
                     break;
             }
             finalWage = finalWage + totalWage;
-            System.out.println("FINAL WAGE = " + finalWage);
+            //System.out.println("FINAL WAGE = " + finalWage);
 
             finalWorkHrs = finalWorkHrs + empHrs;
-            System.out.println("FINAL WORK HRS = " + finalWorkHrs);
+            //System.out.println("FINAL WORK HRS = " + finalWorkHrs);
 
-            if(finalWorkHrs == 100){
+
+            System.out.println("Day->" + i + " : FinalWage->" + finalWage + " : WorkHrs->" + finalWorkHrs);
+            System.out.println("---------------------");
+
+            if(finalWorkHrs == MAX_WORK_HRS_IN_MOTH){
                 System.out.println("EMP COMPLETED HIS WORK HRS OF THIS MONTH");
                 break;
-            } else if (finalWorkHrs > 100) {
+            } else if (finalWorkHrs > MAX_WORK_HRS_IN_MOTH) {
                 System.out.println("!Work Hrs Exceeds the limit! Reset");
                 finalWage = finalWage - totalWage;
                 System.out.println("Final wage --> " +finalWage);
@@ -52,6 +64,13 @@ public class EmployeeWageCalculation {
                 System.out.println("Final work hrs --> " +finalWorkHrs);
             }
         }
-        System.out.println("FINAL WAGE = " + finalWage);
+        return finalWage;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Employee Wage Calculation");
+
+        int totalWage = calculateWage();
+        System.out.println("TOTAL WAGE = " +totalWage);
     }
 }
