@@ -4,9 +4,21 @@ public class EmployeeWageCalculation {
     static int finalWage = 0;
     static int finalWorkHrs = 0;
 
-    //all static fixed values
+    //static fixed values
     static final int FULL_DAY_WORK_HRS = 8;
     static final int PART_TIME_WORK_HRS = 4;
+    String companyName;
+    static int totalWorkingDaysInMonth;
+    static int maxWorkHrsInMonth;
+    static int perHourWage;
+
+    public EmployeeWageCalculation(String companyName, int totalWorkingDaysInMonth, int maxWorkHrsInMonth,
+                                   int perHourWage){
+        this.companyName = companyName;
+        this.totalWorkingDaysInMonth = totalWorkingDaysInMonth;
+        this.maxWorkHrsInMonth = maxWorkHrsInMonth;
+        this.perHourWage = perHourWage;
+    }
 
     static void resetValues(){
         finalWage = 0;
@@ -17,8 +29,7 @@ public class EmployeeWageCalculation {
         return isPresent;
     }
 
-    static int calculateWage(String companyName, int totalWorkingDaysInMonth, int maxWorkHrsInMonth,
-                             int perHourWage){
+    void calculateWage(){
         int totalWage = 0; //eachtimeupdate
         int empHrs = 0; //differentvalues
 
@@ -45,9 +56,7 @@ public class EmployeeWageCalculation {
                     break;
             }
             finalWage = finalWage + totalWage;
-
             finalWorkHrs = finalWorkHrs + empHrs;
-
 
             System.out.println("Day->" + i + " : FinalWage->" + finalWage + " : WorkHrs->" + finalWorkHrs);
             System.out.println("---------------------");
@@ -64,21 +73,28 @@ public class EmployeeWageCalculation {
                 System.out.println("Final work hrs --> " +finalWorkHrs);
             }
         }
-        return finalWage;
+    }
+
+    @Override
+    public String toString() {
+        return "[COMPANY NAME -->" + companyName + " AND TOTAL WAGE-->" + finalWage+"]";
     }
 
     public static void main(String[] args) {
         System.out.println(" * * * Employee Wage Calculation * * * ");
 
-
-        int wiproTotalWage = calculateWage("Wipro", 28, 140, 22);
-        System.out.println("TOTAL WAGE (emp working in wipro) = " +wiproTotalWage);
+        EmployeeWageCalculation wipro = new EmployeeWageCalculation("MindTree",28,140,22);
+        wipro.calculateWage();
+        System.out.println();
+        System.out.println(wipro);
+        System.out.println();
 
         resetValues();
-        System.out.println();
-        System.out.println();
 
-        int tcsTotalWage = calculateWage("TCS", 25, 120, 25);
-        System.out.println("TOTAL WAGE (emp working in tcs) = " +tcsTotalWage);
+        EmployeeWageCalculation tcs = new EmployeeWageCalculation("TCS", 25, 120, 25);
+        tcs.calculateWage();
+        System.out.println();
+        System.out.println(tcs);
+        System.out.println();
     }
 }
