@@ -2,6 +2,11 @@ package com.bridgelabz.Day3PP1;
 
 import java.util.ArrayList;
 
+interface IComputeEmpWage{
+    abstract int checkEmpAttendence();
+    abstract void calculateWage();
+}
+
 class CompanyEmpWage {
     String empCompanyName;
     static int totalWorkingDaysInMonth;
@@ -21,7 +26,7 @@ class CompanyEmpWage {
     }
 }
 
-public class EmployeeWageCalculation {
+public class EmployeeWageCalculation implements IComputeEmpWage{
     static final int FULL_DAY_WORK_HRS = 8;
     static final int PART_TIME_WORK_HRS = 4;
     static int finalWage = 0;
@@ -44,12 +49,12 @@ public class EmployeeWageCalculation {
         finalWage = 0;
         finalWorkHrs = 0;
     }
-    static int checkEmpAttendence(){
+    public int checkEmpAttendence(){
         int isPresent = (int) (Math.random() * 10) % 3;
         return isPresent;
     }
 
-    void calculateWage(){
+    public void calculateWage(){
         int totalWage = 0; //eachtimeupdate
         int empHrs = 0; //differentvalues
 
