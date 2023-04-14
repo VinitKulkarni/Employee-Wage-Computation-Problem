@@ -3,8 +3,9 @@ package com.bridgelabz.Day3PP1;
 import java.util.ArrayList;
 
 interface IComputeEmpWage{
-    abstract int checkEmpAttendence();
-    abstract void calculateWage();
+    int checkEmpAttendence();
+    void calculateWage();
+    void display();
 }
 
 class CompanyEmpWage {
@@ -101,9 +102,15 @@ public class EmployeeWageCalculation implements IComputeEmpWage{
         arraylist.add(new CompanyEmpWage(companyName,totalWorkingDaysInMonth,maxWorkHrsInMonth,perHourWage,finalWorkHrs,finalWage));
     }
 
-    @Override
-    public String toString() {
-        return "[COMPANY NAME -->" + companyName + " AND TOTAL WAGE-->" + finalWage+"]";
+    public void display(){
+        for(int i=0; i<arraylist.size(); i++){
+            System.out.println("company name ->" +arraylist.get(i).empCompanyName);
+            System.out.println("total working days in month ->" +arraylist.get(i).totalWorkingDaysInMonth);
+            System.out.println("max work hours in month ->" +arraylist.get(i).maxWorkHrsInMonth);
+            System.out.println("per hour wage ->" +arraylist.get(i).perHourWage);
+            System.out.println("total work hours ->" +arraylist.get(i).finalWorkHrs);
+            System.out.println("total wage ->" +arraylist.get(i).finalWage);
+        }
     }
 
     public static void main(String[] args) {
@@ -112,7 +119,7 @@ public class EmployeeWageCalculation implements IComputeEmpWage{
         EmployeeWageCalculation wipro = new EmployeeWageCalculation("Wipro",28,140,22);
         wipro.calculateWage();
         System.out.println();
-        System.out.println(wipro);
+        wipro.display();
         System.out.println();
 
         resetValues();
@@ -120,7 +127,7 @@ public class EmployeeWageCalculation implements IComputeEmpWage{
         EmployeeWageCalculation tcs = new EmployeeWageCalculation("TCS", 25, 120, 25);
         tcs.calculateWage();
         System.out.println();
-        System.out.println(tcs);
+        tcs.display();
         System.out.println();
     }
 }
